@@ -14,8 +14,8 @@ from models import Estudiante,Preceptor,Padre,Curso,Asistencia
 @app.route('/')
 def inicio():
     return render_template('index.html')
-"""
-@app.route('/iniciarSesion', methods = ["GET","POST"])
+
+@app.route('/iniciarSesion.html', methods = ["GET","POST"])
 def iniciarSesion():
     if request.method == "POST":
         if not request.form["usuario"] or request.form["contraseña"] or request.form["rol"]:
@@ -29,7 +29,7 @@ def iniciarSesion():
                 print("HOLA")
     
     return render_template('iniciarSesion.html')
-"""
+
 if __name__ =="__main__":
     with app.app_context():
         db.create_all()
