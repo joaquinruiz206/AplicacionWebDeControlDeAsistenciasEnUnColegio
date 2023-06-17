@@ -4,18 +4,18 @@ from flask_sqlalchemy import SQLAlchemy
 
 db = SQLAlchemy(app)
 
-class Curso(db.model):
-    __tablename__="Curso"
+class Curso(db.Model):
+    __tablename__="curso"
     id= db.Column(db.Integer, primary_key=True)
     ano=db.Column(db.Integer, nullable=False)
-    division=db.Column(db.Integer, bullable=False)
-    preceptor_id=db.Column(db.Integet, db.ForeignKey("preceptor.id"))
+    division=db.Column(db.Integer, nullable=False)
+    preceptor_id=db.Column(db.Integer, db.ForeignKey("preceptor.id"))
     cursos=db.relationship('Estudiante',backref='curso', cascade="all")
 
-class Preceptor(db.model):
+class Preceptor(db.Model):
     id=db.Column(db.Integer, primary_key=True)
     nombre=db.Column(db.String(40),nullable=False)
-    apellido=db.Column(db.String(40),nulleable=False)
+    apellido=db.Column(db.String(40),nullable=False)
     correo=db.Column(db.String(40),unique=True, nullable=False)
     clave=db.Column(db.String(80),nullable=False)
     cursos=db.relationship('Curso',backref='preceptor', cascade="all")
@@ -30,12 +30,12 @@ class Estudiante(db.Model):
     dni = db.Column(db.String(20), nullable = False)
     idcurso = db.Column(db.Integer, nullable = False)
     idpadre = db.Column(db.Integer, nullable = False)
-    curso_id=db.Column(db.Integet, db.ForeignKey("curso.id"))
+    curso_id=db.Column(db.Integer, db.ForeignKey("curso.id"))
     asistencias=db.relationship('Asistencia',backref='estudiante', cascade="all")
-    padre_id=db.Column(db.Integet, db.ForeignKey("padre.id"))
+    padre_id=db.Column(db.Integer, db.ForeignKey("padre.id"))
         
 
-class Asistencia:
+class Asistencia(db.Model):
     __tablename__ = "asistencia"
     id = db.Column(db.Integer, primary_key = True)
     fecha = db.Column(db.DateTime, nullable = False)
@@ -43,12 +43,12 @@ class Asistencia:
     asistio = db.Column(db.String(1), nullable = False)
     justificacion = db.Column(db.Text, nullable = False)
     idestudiante = db.Column(db.Integer, nullable = False)
-    estudiante_id=db.Column(db.Integet, db.ForeignKey("estudiante.id"))
+    estudiante_id=db.Column(db.Integer, db.ForeignKey("estudiante.id"))
 
     
 
 
-class Padre:
+class Padre(db.Model):
     __tablename__ = "padre"
     id = db.Column(db.Integer, primary_key = True)
     nombre = db.Column(db.String(40), nullable = False)
