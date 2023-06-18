@@ -5,17 +5,17 @@
     <link>
   </head>   
    <body>     
-	 <form action="/procesar" method="POST">
+	 <form action="http://localhost:5000/iniciarSesion.html" method="post">
       <label for="usuario">Usuario:</label>
-      <input type="text" id="usuario" name="usuario" required>
+      <input type="text" name="usuario" placeholder = usuario >
 
       <label for="contrasenia">Contraseña:</label>
-      <input type="password" id="contrasenia" name="contrasenia" required>
+      <input type="password" name="contraseña" placeholder = contraseña >
 
       <label for="rol">Rol:</label>
-      <input type= "text" id="rol" name="rol" required></input>
+      <input type= "text"  name="rol" placeholder = rol ></input>
 
-      <button type="submit">Enviar</button>
+      <button type="submit" value = "Guardar"> Enviar </button>
 </form>
 
    </body>

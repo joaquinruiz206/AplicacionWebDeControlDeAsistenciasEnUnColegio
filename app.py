@@ -15,19 +15,21 @@ from models import Estudiante,Preceptor,Padre,Curso,Asistencia
 def inicio():
     return render_template('index.html')
 
-@app.route('/iniciarSesion.html', methods = ["GET","POST"])
+@app.route('/iniciarSesion.html', methods = ['GET', 'POST'])
 def iniciarSesion():
     if request.method == "POST":
-        if not request.form["usuario"] or request.form["contraseña"] or request.form["rol"]:
+        if not request.form["usuario"] or not request.form["contraseña"] or not request.form["rol"]:
             return render_template('error.html', error=("Los datos ingresados no son los correctos."))
+       
         else:
-            datos_form = request.form
-            usuario = request.form["usuario"]
-            contraseña = request.form["constraseña"]
+            contraseña = request.form["contraseña"]
             rol = request.form["rol"]
+            usuario = request.form["usuario"]
+            datos_form = request.form
+            print(datos_form)
             if request.form["rol"] =="":
                 print("HOLA")
-    
+
     return render_template('iniciarSesion.html')
 
 if __name__ =="__main__":
