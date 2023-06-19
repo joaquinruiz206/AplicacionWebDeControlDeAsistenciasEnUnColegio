@@ -15,21 +15,32 @@ from models import Estudiante,Preceptor,Padre,Curso,Asistencia
 def inicio():
     return render_template('index.html')
 
+@app.route('/usuarios')
+def obtenerUsuarios():
+    usuarios = Preceptor.query.all()  # Obtener todos los usuarios (Preceptores)
+    return render_template('usuarios.html', usuarios=usuarios)
+
 @app.route('/iniciarSesion.html', methods = ['GET', 'POST'])
 def iniciarSesion():
     if request.method == "POST":
         if not request.form["usuario"] or not request.form["contraseña"] or not request.form["rol"]:
             return render_template('error.html', error=("Los datos ingresados no son los correctos."))
-       
         else:
-            contraseña = request.form["contraseña"]
+            clave = request.form["contraseña"]
             rol = request.form["rol"]
-            usuario = request.form["usuario"]
-            datos_form = request.form
-            print(datos_form)
-            if request.form["rol"] =="":
-                print("HOLA")
-
+            correo = request.form["usuario"]
+            
+            if rol == "preceptor":
+                usuario = Preceptor.query.filter_by(correo=correo).first()
+            elif rol == "padre":
+                usuario = Padre.query.filter_by(correo=correo).first()
+            
+            clave_hasheada = generate_password_hash(clave)
+            
+            if usuario and check_password_hash(clave_hasheada, clave):
+                return render_template("index.html")
+            elif usuario == None:
+                return render_template("error.html", error = ("Datos ingresados incorrectos"))
     return render_template('iniciarSesion.html')
 
 if __name__ =="__main__":
