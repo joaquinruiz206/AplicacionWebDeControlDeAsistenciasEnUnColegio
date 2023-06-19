@@ -17,7 +17,7 @@ class Preceptor(db.Model):
     nombre=db.Column(db.String(40),nullable=False)
     apellido=db.Column(db.String(40),nullable=False)
     correo=db.Column(db.String(40),unique=True, nullable=False)
-    clave=db.Column(db.String(80),nullable=False)
+    clave=db.Column(db.String(120),nullable=False)
     cursos=db.relationship('Curso',backref='preceptor', cascade="all")
     
 
@@ -54,5 +54,5 @@ class Padre(db.Model):
     nombre = db.Column(db.String(40), nullable = False)
     apellido = db.Column(db.String(40), nullable = False)
     correo = db.Column(db.String(50), unique = True, nullable = False)
-    clave = db.Column(db.String(50),unique = True, nullable = False)
+    clave = db.Column(db.String(120),unique = True, nullable = False)
     asistencias=db.relationship('Estudiante',backref='padre', cascade="all")

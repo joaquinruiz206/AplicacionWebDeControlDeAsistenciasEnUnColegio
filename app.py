@@ -35,9 +35,7 @@ def iniciarSesion():
             elif rol == "padre":
                 usuario = Padre.query.filter_by(correo=correo).first()
             
-            clave_hasheada = generate_password_hash(clave)
-            
-            if usuario and check_password_hash(clave_hasheada, clave):
+            if usuario and usuario.clave == clave:
                 return render_template("index.html")
             elif usuario == None:
                 return render_template("error.html", error = ("Datos ingresados incorrectos"))
