@@ -34,10 +34,9 @@ def iniciarSesion():
                 usuario = Preceptor.query.filter_by(correo=correo).first()
             elif rol == "padre":
                 usuario = Padre.query.filter_by(correo=correo).first()
-            
             if usuario and usuario.clave == clave:
                 return render_template("index.html")
-            elif usuario == None:
+            elif usuario == None or clave != usuario.clave:
                 return render_template("error.html", error = ("Datos ingresados incorrectos"))
     return render_template('iniciarSesion.html')
 
