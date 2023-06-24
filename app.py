@@ -133,7 +133,15 @@ def logout():
 
 @app.route("/asistenciahijo.html")
 def asistenciahijo():
-    return render_template("asistenciahijo.html")
+    if session.get("rol") == "padre":
+        usuario_id = session.get('usuario_id')
+        padre = Padre.query.get(usuario_id)
+        return render_template("informeTotal.html", usuario = padre)
+    else:
+        rol = session.get("rol")
+        str(rol)
+        return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
+
 
 if __name__ =="__main__":
     with app.app_context():
