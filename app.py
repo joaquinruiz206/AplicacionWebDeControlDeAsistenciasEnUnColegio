@@ -81,17 +81,16 @@ def iniciopadre():
 
 @app.route("/registraAsistencia.html", methods = ['GET', 'POST'])
 def registraAsistencia():
-    if request.method == "POST":
-        if request.form["tipo"] != None:
+
+    if request.method == "POST":   
             
             tipo = request.form["tipo"]
             fecha = request.form["fecha"]
             idcurso = request.form["curso"]
             curso = Curso.query.get(idcurso)
             estudiantes = curso.estudiantes
-            return render_template("registraAsistencia.html", tipo = tipo, fecha = fecha, curso = curso, band = False, estudiantes = estudiantes)
-        else:
-            return render_template("registraAsistencia.html", tipo = tipo, fecha = fecha, curso = curso, band = False, estudiantes = estudiantes)
+            return render_template("registraAsistencia.html", tipo = tipo, fecha = fecha, curso = curso, estudiantes = estudiantes, band = False)
+            
         
     if session.get("rol") == "preceptor":
         usuario_id = session.get('usuario_id')
@@ -103,15 +102,7 @@ def registraAsistencia():
         str(rol)
         return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
 
-@app.route('/cargaAsistencia', methods=['POST'])
-def cargaAsistencia():
-    fecha = request.form['fecha']
-    tipo = request.form['tipo']
-    estudiante_ids = request.form.getlist('estudiante')
-    print(fecha)
-    print(tipo)
-    print(estudiante_ids)
-    return render_template("registraAsistencia.html")
+    return redirect(url_for("inicio"+ rol))
 
 @app.route("/informaAsistencia.html")
 def informaAsistencia():
