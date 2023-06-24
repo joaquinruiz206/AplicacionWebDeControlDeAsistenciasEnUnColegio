@@ -11,7 +11,7 @@
     
     <link rel="stylesheet" href="{{url_for('static', filename= 'css/mainIndex.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename= 'css/footer.css')}}">
-    
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/error.css')}}">
     <title>Aplicacion Asistencias</title>
 </head>
 <body>
@@ -32,9 +32,16 @@
             <div class="footer-bottom">
                 <p>copyright &copy;2023 Joaquin Ruiz y Juan Ignacio Latorre. designed by <span>Programadores</span></p>
             </div>
+             {% if error %}
+             <div id="mensaje-error">
+                 {{ error }}
+                 <button id="cerrar-btn">Cerrar</button>
+             </div>
+            {% endif %}
             
             
         </footer>
     <script src="https://kit.fontawesome.com/7c935897fa.js" crossorigin="anonymous"></script>
+    <script src="{{ url_for('static', filename='script/main.js') }}"></script>
     </body>
 </html>
