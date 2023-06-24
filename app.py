@@ -59,7 +59,6 @@ def iniciopreceptor():
     if session.get("rol") == "preceptor":
         usuario_id = session.get('usuario_id')
         preceptor = Preceptor.query.get(usuario_id)
-        
         return render_template("indexpreceptor.html", usuario = preceptor)
     else:
         rol = session.get("rol")
@@ -89,6 +88,10 @@ def pruebas():
 def logout():
     session['usuario_id'] = None
     return redirect("/")
+
+@app.route("/asistenciahijo.html")
+def asistenciahijo():
+    return render_template("asistenciahijo.html")
 
 if __name__ =="__main__":
     with app.app_context():
