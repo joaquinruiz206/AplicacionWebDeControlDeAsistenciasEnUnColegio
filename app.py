@@ -13,7 +13,7 @@ from models import Estudiante,Preceptor,Padre,Curso,Asistencia
 
 @app.route('/')
 def inicio():
-    if not session.get("correo"):
+    if not session.get("usuario_id"):
         return redirect('iniciarSesion.html')
 
 @app.route('/usuarios')
@@ -42,7 +42,7 @@ def iniciarSesion():
 
             if usuario and usuario.clave == clave:
 
-                session["correo"] = request.form.get("correo")
+                session['usuario_id'] = usuario.id
                 session["rol"] = rol
                 str(rol)
                 return redirect("/index"+ rol +".html")
@@ -57,7 +57,10 @@ def iniciarSesion():
 @app.route("/indexpreceptor.html")
 def inicioPreceptor():
     if session.get("rol") == "preceptor":
-        return render_template("indexpreceptor.html")
+        usuario_id = session.get('usuario_id')
+        preceptor = Preceptor.query.get(usuario_id)
+        
+        return render_template("indexpreceptor.html", usuario = preceptor)
     else:
         return redirect(url_for('inicioPadre', error = "Ingreso no autorizado"))
        
@@ -65,7 +68,9 @@ def inicioPreceptor():
 @app.route("/indexpadre.html")
 def inicioPadre():
     if session.get("rol") == "padre":
-        return render_template("indexpadre.html")
+        usuario_id = session.get('usuario_id')
+        padre = Padre.query.get(usuario_id)
+        return render_template("indexpadre.html", usuario = padre)
     else:
         return redirect(url_for('inicioPreceptor', error = "Ingreso no autorizado"))
 
@@ -78,7 +83,7 @@ def pruebas():
 
 @app.route("/logout")
 def logout():
-    session["correo"] = None
+    session['usuario_id'] = None
     return redirect("/")
 
 if __name__ =="__main__":
