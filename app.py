@@ -37,7 +37,7 @@ def iniciarSesion():
             if usuario and usuario.clave == clave:
                 return render_template("index.html")
             elif usuario == None or clave != usuario.clave:
-                return render_template("error.html", error = ("Datos ingresados incorrectos"))
+                return render_template("iniciarSesion.html", error="Se Ingreso un Gmail o Contraseña Incorrecta.")
     return render_template('iniciarSesion.html')
 
 if __name__ =="__main__":

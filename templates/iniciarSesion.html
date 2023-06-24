@@ -6,7 +6,7 @@
     <title>Aplicacion Asistencias</title>
 
     <link rel="stylesheet" href="{{url_for('static', filename= 'css/mainInicioSesion.css')}}">
-
+    <link rel="stylesheet" href="{{url_for('static', filename= 'css/error.css')}}">
 </head>
 
 <body>
@@ -32,6 +32,14 @@
                   <br></br>
                   <button type="submit" value = "Guardar" class="btn"> Enviar </button>
              </form>
+
+             {% if error %}
+             <div id="mensaje-error">
+                 {{ error }}
+                 <button id="cerrar-btn">Cerrar</button>
+             </div>
+            {% endif %}
+
         </div>
     </div>
   </div>
@@ -39,6 +47,6 @@
    </section>
       
 
-    
+   <script src="{{ url_for('static', filename='script/main.js') }}"></script>
 </body>
 </html>
