@@ -13,7 +13,7 @@ from models import Estudiante,Preceptor,Padre,Curso,Asistencia
 
 @app.route('/')
 def inicio():
-    if not session.get("nombre"):
+    if not session.get("correo"):
         return redirect('iniciarSesion.html')
 
 @app.route('/usuarios')
@@ -25,31 +25,30 @@ def obtenerUsuarios():
 def iniciarSesion():
     if request.method == "POST":
         if not request.form["usuario"] or not request.form["contraseña"] or not request.form["rol"]:
-            return render_template('error.html', error=("Los datos ingresados no son los correctos."))
+            return render_template("iniciarSesion.html", error="Ingrese correo y contraseña")
         else:
             clave = request.form["contraseña"]
             rol = request.form["rol"]
             correo = request.form["usuario"]
-            
+
+                
             if rol == "preceptor":
                 usuario = Preceptor.query.filter_by(correo=correo).first()
             elif rol == "padre":
                 usuario = Padre.query.filter_by(correo=correo).first()
             
             
-
+            
 
             if usuario and usuario.clave == clave:
-                print("Hola")
 
-                session["nombre"] = request.form.get("nombre")
+                session["correo"] = request.form.get("correo")
                 session["rol"] = rol
                 str(rol)
                 return redirect("/index"+ rol +".html")
             
             
             elif usuario == None or clave != usuario.clave:
-                print("Chau")
                 return render_template("iniciarSesion.html", error="Se Ingreso un Gmail o Contraseña Incorrecta.")
     
     return render_template('iniciarSesion.html')
@@ -72,15 +71,15 @@ def inicioPadre():
 
 
 
-
-@app.route("/logout")
-def logout():
-    session["nombre"] = None
-    return redirect("/")
-
 @app.route("/index.html")
 def pruebas():
     return render_template("index.html")
+
+
+@app.route("/logout")
+def logout():
+    session["correo"] = None
+    return redirect("/")
 
 if __name__ =="__main__":
     with app.app_context():
