@@ -32,15 +32,16 @@
 
     <h1 class="principal"> <span>Asistencias Colegio San Miguel</span></h1>
 
+    {% if band %}
     <div class="container">
         <h1>Formulario</h1>
       
-        <form>
+        <form action='' method='POST'>
           <div class="form-group">
             <label for="opciones">Selecciona un Hijo por su DNI:</label>
-            <select class="form-control" id="opciones" name="opciones">
+            <select class="form-control" id="dni" name="dni">
                 {% for hijo in hijos %}
-                 <option value="hijo.dni">{{hijo.dni}}</option>
+                 <option value= {{hijo.id}} >{{hijo.dni}}</option>
                 {% endfor %}
 
             </select>
@@ -50,8 +51,17 @@
           
           <input type="submit" class="btn btn-primary" value="Enviar">
         </form>
+        </div>
     </div>
-</div>
+    {% else %}
+
+        
+            <p>{{ asistencias.asistencias }}</p>
+       
+    {% endif %}
+ 
+    
+
     <footer>
         <div class="footer-content">
             <h3>Colegio</h3>
