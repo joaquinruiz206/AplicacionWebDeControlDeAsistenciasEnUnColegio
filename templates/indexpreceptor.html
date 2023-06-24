@@ -30,12 +30,13 @@
         </div>
     </nav>
 
-    <h1> Asistencias Colegio</h1>
+    <h1 class= "principal"> Asistencias Colegio San Miguel</h1>
 
     
     <div class="container">
         <section class="profile-section">
             <i class="fas fa-user-circle profile-icon"></i>
+            <h2 class= "profile-name">Preceptor</h2>
             <h1 class="profile-name">{{usuario.nombre}}</h1>
             <p class="profile-email">{{usuario.correo}}</p>
         </section>
@@ -43,44 +44,36 @@
     
         <div class="container">
             <div class="row">
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-4 col-lg-4">
                     <div class="card">
-                        <img src="imagen1.jpg" class="card-img-top" alt="Imagen 1">
+                        <img src="{{url_for("static", filename = "img/registraAsistencia.png")}}" class="card-img-top" alt="registraAsistencia">
                         <div class="card-body">
-                            <h5 class="card-title">Card 1</h5>
-                            <p class="card-text">Descripción de la Card 1.</p>
-                            <a href="https://www.ejemplo.com" class="btn btn-primary">Ir</a>
+                            <h5 class="card-title">Registrar Asistencia</h5>
+                            <p class="card-text">Cargar asistencia del día de la fecha</p>
+                            <a href="registraAsistencia.html" class="btn btn-primary">Ir</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-4 col-lg-4">
                     <div class="card">
-                        <img src="imagen2.jpg" class="card-img-top" alt="Imagen 2">
+                        <img src="{{url_for("static", filename = "img/controlAsistencia.png")}}" class="card-img-top" alt="controlAsistencia">
                         <div class="card-body">
-                            <h5 class="card-title">Card 2</h5>
-                            <p class="card-text">Descripción de la Card 2.</p>
-                            <a href="https://www.ejemplo.com" class="btn btn-primary">Ir</a>
+                            <h5 class="card-title">Informe con detalles</h5>
+                            <p class="card-text">Obtener un informe detallado de asistencias de los estudiantes de un curso</p>
+                            <a href="informaAsistencia.html" class="btn btn-primary">Ir</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
+                <div class="col-md-4 col-lg-4">
                     <div class="card">
-                        <img src="imagen3.jpg" class="card-img-top" alt="Imagen 3">
+                        <img src="{{url_for("static", filename = "img/informeTotal.png")}}" class="card-img-top" alt="informeTotal">
                         <div class="card-body">
-                            <h5 class="card-title">Card 3</h5>
-                            <p class="card-text">Descripción de la Card 3.</p>
-                            <a href="https://www.ejemplo.com" class="btn btn-primary">Ir</a>
+                            <h5 class="card-title">Listado de asistencia</h5>
+                            <p class="card-text">Obtener un listado de asistencia a un tipo de clase para un curso en una fecha dada</p>
+                            <a href="informeTotal.html" class="btn btn-primary">Ir</a>
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6 col-lg-3">
-                    <div class="card">
-                        <img src="imagen4.jpg" class="card-img-top" alt="Imagen 4">
-                        <div class="card-body">
-                            <h5 class="card-title">Card 4</h5>
-                            <p class="card-text">Descripción de la Card 4.</p>
-                            <a href="https://www.ejemplo.com" class="btn btn-primary">Ir</a>
-                        </div>
                     </div>
                 </div>
             </div>

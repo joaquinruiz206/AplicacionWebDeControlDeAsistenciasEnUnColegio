@@ -73,11 +73,25 @@ def iniciopadre():
     if session.get("rol") == "padre":
         usuario_id = session.get('usuario_id')
         padre = Padre.query.get(usuario_id)
+        print(padre)
         return render_template("indexpadre.html", usuario = padre)
     else:
         rol = session.get("rol")
         str(rol)
         return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
+
+
+@app.route("/registraAsistencia.html")
+def registraAsistencia():
+    return render_template("registraAsistencia.html")
+
+@app.route("/informaAsistencia.html")
+def informaAsistencia():
+    return render_template("informaAsistencia.html")
+
+@app.route("/informeTotal.html")
+def informeTotal():
+    return render_template("informeTotal.html")
 
 
 @app.route("/index.html")
