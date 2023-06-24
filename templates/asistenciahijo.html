@@ -37,22 +37,23 @@
       
         <form>
           <div class="form-group">
-            <label for="opciones">Selecciona una opción:</label>
+            <label for="opciones">Selecciona un Hijo por su DNI:</label>
             <select class="form-control" id="opciones" name="opciones">
-              <option value="opcion1">Opción 1</option>
-              <option value="opcion2">Opción 2</option>
-              <option value="opcion3">Opción 3</option>
-              <option value="opcion4">Opción 4</option>
+                {% for hijo in hijos %}
+                 <option value="hijo.dni">{{hijo.dni}}</option>
+                {% endfor %}
+
             </select>
           </div>
         
           <br><br>
-        
+          
           <input type="submit" class="btn btn-primary" value="Enviar">
         </form>
-      </div>
     </div>
-    <footer>
+</div>
+<h2>dasd</h2>
+        <footer>
         <div class="footer-content">
             <h3>Colegio</h3>
             <p>Descripcion del colegio</p>

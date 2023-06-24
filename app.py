@@ -133,7 +133,8 @@ def asistenciahijo():
     if session.get("rol") == "padre":
         usuario_id = session.get('usuario_id')
         padre = Padre.query.get(usuario_id)
-        return render_template("informeTotal.html", usuario = padre)
+        hijos=padre.hijos
+        return render_template("asistenciahijo.html", usuario = padre, hijos=hijos)
     else:
         rol = session.get("rol")
         str(rol)

@@ -30,9 +30,9 @@ class Estudiante(db.Model):
     dni = db.Column(db.String(20), nullable = False)
     idcurso = db.Column(db.Integer, nullable = False)
     idpadre = db.Column(db.Integer, nullable = False)
-    curso_id=db.Column(db.Integer, db.ForeignKey("curso.id"))
+    idcurso=db.Column(db.Integer, db.ForeignKey("curso.id"))
     asistencias=db.relationship('Asistencia',backref='estudiante', cascade="all")
-    padre_id=db.Column(db.Integer, db.ForeignKey("padre.id"))
+    idpadre=db.Column(db.Integer, db.ForeignKey("padre.id"))
         
 
 class Asistencia(db.Model):
@@ -55,4 +55,4 @@ class Padre(db.Model):
     apellido = db.Column(db.String(40), nullable = False)
     correo = db.Column(db.String(50), unique = True, nullable = False)
     clave = db.Column(db.String(120),unique = True, nullable = False)
-    asistencias=db.relationship('Estudiante',backref='padre', cascade="all")
+    hijos=db.relationship('Estudiante',backref='padre', cascade="all")
