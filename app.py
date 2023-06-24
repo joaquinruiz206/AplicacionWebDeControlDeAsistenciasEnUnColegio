@@ -1,5 +1,5 @@
 from datetime import datetime
-from flask  import Flask, request, render_template
+from flask  import Flask, request, render_template, session, redirect
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -13,7 +13,8 @@ from models import Estudiante,Preceptor,Padre,Curso,Asistencia
 
 @app.route('/')
 def inicio():
-    return render_template('index.html')
+    if not session.get("nombre"):
+        return render_template('iniciarSesion.html')
 
 @app.route('/usuarios')
 def obtenerUsuarios():
@@ -34,11 +35,42 @@ def iniciarSesion():
                 usuario = Preceptor.query.filter_by(correo=correo).first()
             elif rol == "padre":
                 usuario = Padre.query.filter_by(correo=correo).first()
+
+
+
             if usuario and usuario.clave == clave:
-                return render_template("index.html")
+
+                session["nombre"] = request.form.get("nombre")
+                session["rol"] = rol
+                str(rol)
+                return redirect("/index"+ rol +".html")
+            
+            
             elif usuario == None or clave != usuario.clave:
                 return render_template("iniciarSesion.html", error="Se Ingreso un Gmail o Contraseña Incorrecta.")
     return render_template('iniciarSesion.html')
+
+
+@app.route("/indexpreceptor.html")
+def inicioPreceptor():
+    if session.get("rol") == "preceptor":
+        return render_template("indexpreceptor.html")
+    else:
+        return redirect("error.html")
+    
+@app.route("/indexpadre.html")
+def inicioPadre():
+    if session.get("rol") == "padre":
+        return render_template("indexpadre.html")
+    else:
+        return redirect("error.html")
+
+
+
+@app.route("/logout")
+def logout():
+    session["nombre"] = None
+    return redirect("/")
 
 if __name__ =="__main__":
     with app.app_context():
