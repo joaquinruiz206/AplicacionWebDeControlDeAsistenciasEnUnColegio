@@ -30,16 +30,18 @@
         </div>
     </nav>
 
-    <h1> Asistencias Colegio</h1>
+    <h1 class="principal"> <span>Asistencias Colegio San Miguel</span></h1>
 
     <div class="container">
         <section class="profile-section">
             <i class="fas fa-user-circle profile-icon"></i>
-            <h1 class="profile-name">{{usuario.nombre}}</h1>
-            <p class="profile-email">{{usuario.correo}}</p>
+            <h2 class="profile-name"><b>Padre</b></h2>
+            <h1 class="profile-name">Nombre: {{usuario.nombre}}</h1>
+            <p class="profile-email">Correo: {{usuario.correo}}</p>
         </section>
     </div>
     
+<<<<<<< HEAD
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-lg-3">
@@ -82,8 +84,22 @@
                         </div>
                     </div>
                 </div>
+=======
+    <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-md-6">
+            <div class="card">
+              <img src="{{url_for('static', filename= 'img/asistenciaPadre.webp')}}" class="card-img-top" alt="Imagen de la card">
+              <div class="card-body">
+                <h5 class="card-title">Revisar Asistencia</h5>
+                <p class="card-text">Ingresando el DNI de su hijo se podra visualizar la cantidad de asistencias que posee.</p>
+                <a href="asistenciahijo.html" class="btn btn-primary">Ir</a>
+              </div>
+>>>>>>> 36e0a523ba43a586e613352985652a48756eafa8
             </div>
+          </div>
         </div>
+      </div>
     
 
 
