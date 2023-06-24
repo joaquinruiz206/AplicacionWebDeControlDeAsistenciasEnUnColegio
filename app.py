@@ -55,25 +55,29 @@ def iniciarSesion():
 
 
 @app.route("/indexpreceptor.html")
-def inicioPreceptor():
+def iniciopreceptor():
     if session.get("rol") == "preceptor":
         usuario_id = session.get('usuario_id')
         preceptor = Preceptor.query.get(usuario_id)
         
         return render_template("indexpreceptor.html", usuario = preceptor)
     else:
-        return redirect(url_for('inicioPadre', error = "Ingreso no autorizado"))
+        rol = session.get("rol")
+        str(rol)
+        return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
+    
        
     
 @app.route("/indexpadre.html")
-def inicioPadre():
+def iniciopadre():
     if session.get("rol") == "padre":
         usuario_id = session.get('usuario_id')
         padre = Padre.query.get(usuario_id)
         return render_template("indexpadre.html", usuario = padre)
     else:
-        return redirect(url_for('inicioPreceptor', error = "Ingreso no autorizado"))
-
+        rol = session.get("rol")
+        str(rol)
+        return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
 
 
 @app.route("/index.html")

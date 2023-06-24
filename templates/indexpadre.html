@@ -35,8 +35,8 @@
     <div class="container">
         <section class="profile-section">
             <i class="fas fa-user-circle profile-icon"></i>
-            <h1 class="profile-name">Nombre de Usuario</h1>
-            <p class="profile-email">usuario@example.com</p>
+            <h1 class="profile-name">{{usuario.nombre}}</h1>
+            <p class="profile-email">{{usuario.correo}}</p>
         </section>
     </div>
     
@@ -48,7 +48,7 @@
                         <div class="card-body">
                             <h5 class="card-title">Card 1</h5>
                             <p class="card-text">Descripción de la Card 1.</p>
-                            <a href="https://www.ejemplo.com" class="btn btn-primary">Ir</a>
+                            <a href="{{ url_for('ejemplo', usuario=usuario) }}" class="btn btn-primary">Ir</a>
                         </div>
                     </div>
                 </div>
