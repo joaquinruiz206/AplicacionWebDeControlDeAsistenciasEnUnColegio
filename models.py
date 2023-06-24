@@ -43,7 +43,7 @@ class Asistencia(db.Model):
     asistio = db.Column(db.String(1), nullable = False)
     justificacion = db.Column(db.Text, nullable = False)
     idestudiante = db.Column(db.Integer, nullable = False)
-    estudiante_id=db.Column(db.Integer, db.ForeignKey("estudiante.id"))
+    idestudiante=db.Column(db.Integer, db.ForeignKey("estudiante.id"))
 
     
 

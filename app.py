@@ -2,6 +2,7 @@ from datetime import datetime
 from flask  import Flask, request, render_template, session, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
+from dateutil.parser import parse
 
 app=Flask(__name__)
 app.config.from_pyfile('config.py')
@@ -79,7 +80,7 @@ def iniciopadre():
         return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
 
 
-@app.route("/registraAsistencia.html", methods = ['GET', 'POST'])
+@app.route("/registraAsistencia.html")
 def registraAsistencia():
 
     if request.method == "POST":   
@@ -139,20 +140,37 @@ def logout():
     session['usuario_id'] = None
     return redirect("/")
 
-@app.route("/asistenciahijo.html", methods = ['GET','POST'])
+@app.route("/asistenciahijo.html", methods=['GET', 'POST'])
 def asistenciahijo():
+    if request.method == 'POST':
+        id_est = request.form['dni']
+        estudiante = Estudiante.query.get(id_est)
+        print(str(estudiante))
+        
+        """    
+        if estudiante is not None:
+            band = False
+            asistencias = []
+        for asistencia in estudiante.asistencias:
+                fecha_str = asistencia.fecha
+                fecha = datetime.strptime(fecha_str, '%d-%m-%Y')
+                asistencia.fecha = fecha.strftime('%d-%m-%Y')
+                asistencias.append(asistencia)
+        """
+        return render_template("asistenciahijo.html", band=False, asistencias=estudiante)
+
     if session.get("rol") == "padre":
         usuario_id = session.get('usuario_id')
         padre = Padre.query.get(usuario_id)
-        hijos=padre.hijos
-        return render_template("asistenciahijo.html", usuario = padre, hijos=hijos)
+        hijos = padre.hijos
+        
+        return render_template("asistenciahijo.html", usuario=padre, hijos=hijos, band=True)
     else:
         rol = session.get("rol")
-        str(rol)
-        return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
-
+        return redirect(url_for("inicio" + rol, error="Ingreso no autorizado"))
+        
 
 if __name__ =="__main__":
-    with app.app_context():
+    with app.app_context(): 
         db.create_all()
         app.run(debug=True)
