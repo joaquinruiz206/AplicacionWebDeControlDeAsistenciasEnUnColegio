@@ -82,15 +82,36 @@ def iniciopadre():
 
 @app.route("/registraAsistencia.html")
 def registraAsistencia():
-    return render_template("registraAsistencia.html")
+    if session.get("rol") == "preceptor":
+        usuario_id = session.get('usuario_id')
+        preceptor = Preceptor.query.get(usuario_id)
+        return render_template("registraAsistencia.html", usuario = preceptor)
+    else:
+        rol = session.get("rol")
+        str(rol)
+        return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
 
 @app.route("/informaAsistencia.html")
 def informaAsistencia():
-    return render_template("informaAsistencia.html")
+    if session.get("rol") == "preceptor":
+        usuario_id = session.get('usuario_id')
+        preceptor = Preceptor.query.get(usuario_id)
+        return render_template("informaAsistencia.html", usuario = preceptor)
+    else:
+        rol = session.get("rol")
+        str(rol)
+        return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
 
 @app.route("/informeTotal.html")
 def informeTotal():
-    return render_template("informeTotal.html")
+    if session.get("rol") == "preceptor":
+        usuario_id = session.get('usuario_id')
+        preceptor = Preceptor.query.get(usuario_id)
+        return render_template("informeTotal.html", usuario = preceptor)
+    else:
+        rol = session.get("rol")
+        str(rol)
+        return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
 
 
 @app.route("/index.html")
