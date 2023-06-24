@@ -53,7 +53,6 @@ def iniciarSesion():
     
     return render_template('iniciarSesion.html')
 
-#Inicios usuarios
 
 @app.route("/indexpreceptor.html")
 def iniciopreceptor():
@@ -73,13 +72,11 @@ def iniciopadre():
     if session.get("rol") == "padre":
         usuario_id = session.get('usuario_id')
         padre = Padre.query.get(usuario_id)
-        print(padre)
         return render_template("indexpadre.html", usuario = padre)
     else:
         rol = session.get("rol")
         str(rol)
         return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
-
 
 
 @app.route("/registraAsistencia.html")
@@ -120,7 +117,6 @@ def informeTotal():
         return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
 
 
-
 @app.route("/index.html")
 def pruebas():
     return render_template("index.html")
@@ -131,7 +127,7 @@ def logout():
     session['usuario_id'] = None
     return redirect("/")
 
-@app.route("/asistenciahijo.html")
+@app.route("/asistenciahijo.html", methods = ['GET','POST'])
 def asistenciahijo():
     if session.get("rol") == "padre":
         usuario_id = session.get('usuario_id')
