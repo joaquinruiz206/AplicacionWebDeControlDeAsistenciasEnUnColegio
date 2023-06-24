@@ -79,6 +79,43 @@ def iniciopadre():
         return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
 
 
+<<<<<<< HEAD
+=======
+@app.route("/registraAsistencia.html")
+def registraAsistencia():
+    if session.get("rol") == "preceptor":
+        usuario_id = session.get('usuario_id')
+        preceptor = Preceptor.query.get(usuario_id)
+        return render_template("registraAsistencia.html", usuario = preceptor)
+    else:
+        rol = session.get("rol")
+        str(rol)
+        return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
+
+@app.route("/informaAsistencia.html")
+def informaAsistencia():
+    if session.get("rol") == "preceptor":
+        usuario_id = session.get('usuario_id')
+        preceptor = Preceptor.query.get(usuario_id)
+        return render_template("informaAsistencia.html", usuario = preceptor)
+    else:
+        rol = session.get("rol")
+        str(rol)
+        return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
+
+@app.route("/informeTotal.html")
+def informeTotal():
+    if session.get("rol") == "preceptor":
+        usuario_id = session.get('usuario_id')
+        preceptor = Preceptor.query.get(usuario_id)
+        return render_template("informeTotal.html", usuario = preceptor)
+    else:
+        rol = session.get("rol")
+        str(rol)
+        return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
+
+
+>>>>>>> 853ee8563ce289d50dd1f9ef374ca1c17aa9af1f
 @app.route("/index.html")
 def pruebas():
     return render_template("index.html")
