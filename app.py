@@ -79,8 +79,6 @@ def iniciopadre():
         return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
 
 
-<<<<<<< HEAD
-=======
 @app.route("/registraAsistencia.html")
 def registraAsistencia():
     if session.get("rol") == "preceptor":
@@ -92,6 +90,8 @@ def registraAsistencia():
         str(rol)
         return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
 
+
+
 @app.route("/informaAsistencia.html")
 def informaAsistencia():
     if session.get("rol") == "preceptor":
@@ -102,6 +102,8 @@ def informaAsistencia():
         rol = session.get("rol")
         str(rol)
         return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
+
+
 
 @app.route("/informeTotal.html")
 def informeTotal():
@@ -115,7 +117,6 @@ def informeTotal():
         return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
 
 
->>>>>>> 853ee8563ce289d50dd1f9ef374ca1c17aa9af1f
 @app.route("/index.html")
 def pruebas():
     return render_template("index.html")
@@ -128,18 +129,8 @@ def logout():
 
 @app.route("/asistenciahijo.html", methods = ['GET','POST'])
 def asistenciahijo():
-    if session.get("rol") == "padre":
-        usuario_id = session.get('usuario_id')
-        padre = Padre.query.get(usuario_id)
-        return render_template("indexpadre.html", usuario = padre)
-    
-     if request.method == 'POST':
-         print("Hola")
-    else:
-        rol = session.get("rol")
-        str(rol)
-        return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
-    
+    return render_template("asistenciahijo.html")
+
 if __name__ =="__main__":
     with app.app_context():
         db.create_all()
