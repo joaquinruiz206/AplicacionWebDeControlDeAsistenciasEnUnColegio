@@ -31,20 +31,21 @@
     </nav>
 
 
+<h1 class= "principal"> Asistencias Colegio San Miguel</h1>
 <div class= "container-form">
     <form action="" method="post">
             <div class="input-box">
             <input type="date" placeholder="fecha" name="fecha" class="input-control">
         </div>
-            <select class="form-select" aria-label="Default select example">
+            <select  name="tipo" class="form-select" aria-label="Default select example">
                 <option selected>Clase</option>
-                <option value= aula >Aula</option>
-                <option value= fisica >Física</option>
+                <option  value="aula">Aula</option>
+                <option  value= "fisica">Física</option>
             </select>
-            <select class="form-select" aria-label="Default select example">
+            <select name= "curso" class="form-select" aria-label="Default select example">
                 <option selected>Curso</option>
                 {% for curso in cursos %}
-                  <option value= curso.id >{{curso.id}}</option>
+                  <option  value= curso.id >{{curso.id}}</option>
                 {% endfor %}
             </select>
 
@@ -53,12 +54,8 @@
     </form>
  </div>
 
-    <h1 class= "principal"> Asistencias Colegio San Miguel</h1>
-    <div class="list-group list-group-horizontal">
-    {% for curso in cursos %}
-      <a href="#" class="list-group-item">{{curso.id}}</a>
-     {% endfor %}
-    </div>
+    
+
 
     
     <footer>

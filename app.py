@@ -79,8 +79,16 @@ def iniciopadre():
         return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
 
 
-@app.route("/registraAsistencia.html")
+@app.route("/registraAsistencia.html", methods = ['GET', 'POST'])
 def registraAsistencia():
+    if request.method == "POST":
+        tipo = request.form["tipo"]
+        fecha = request.form["fecha"]
+        idcurso = request.form["curso"]
+        print(tipo)
+        print(fecha)
+        print(idcurso)
+        
     if session.get("rol") == "preceptor":
         usuario_id = session.get('usuario_id')
         preceptor = Preceptor.query.get(usuario_id)
