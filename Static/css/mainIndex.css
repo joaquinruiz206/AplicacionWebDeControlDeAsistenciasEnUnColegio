@@ -7,3 +7,8 @@
 body{
     background-color: aquamarine;
 }
+
+.card {
+     background-color: beige;
+     margin-bottom: 20px;
+}
