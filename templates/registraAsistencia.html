@@ -30,6 +30,7 @@
         </div>
     </nav>
 
+
 <div class= "container-form">
     <form action="" method="post">
             <div class="input-box">
@@ -51,6 +52,14 @@
         <button type="submit" value = "Guardar" class="btn"> Enviar </button>
     </form>
  </div>
+
+    <h1 class= "principal"> Asistencias Colegio San Miguel</h1>
+    <div class="list-group list-group-horizontal">
+    {% for curso in cursos %}
+      <a href="#" class="list-group-item">{{curso.id}}</a>
+     {% endfor %}
+    </div>
+
     
     <footer>
         <div class="footer-content">
