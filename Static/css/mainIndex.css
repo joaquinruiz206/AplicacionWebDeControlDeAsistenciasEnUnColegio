@@ -60,3 +60,13 @@ body{
             align-items: center;
             height: 50vh;
 }
+.form-check{
+	display: flex;
+	justify-content: center;
+}
+.form-check-input{
+	position: relative;
+}
+#estudiante{
+	padding-left: 50 px;
+}

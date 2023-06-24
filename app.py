@@ -65,7 +65,7 @@ def iniciopreceptor():
         str(rol)
         return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
     
-       
+      
     
 @app.route("/indexpadre.html")
 def iniciopadre():
@@ -82,24 +82,36 @@ def iniciopadre():
 @app.route("/registraAsistencia.html", methods = ['GET', 'POST'])
 def registraAsistencia():
     if request.method == "POST":
-        tipo = request.form["tipo"]
-        fecha = request.form["fecha"]
-        idcurso = request.form["curso"]
-        print(tipo)
-        print(fecha)
-        print(idcurso)
+        if request.form["tipo"] != None:
+            
+            tipo = request.form["tipo"]
+            fecha = request.form["fecha"]
+            idcurso = request.form["curso"]
+            curso = Curso.query.get(idcurso)
+            estudiantes = curso.estudiantes
+            return render_template("registraAsistencia.html", tipo = tipo, fecha = fecha, curso = curso, band = False, estudiantes = estudiantes)
+        else:
+            return render_template("registraAsistencia.html", tipo = tipo, fecha = fecha, curso = curso, band = False, estudiantes = estudiantes)
         
     if session.get("rol") == "preceptor":
         usuario_id = session.get('usuario_id')
         preceptor = Preceptor.query.get(usuario_id)
         cursos_preceptor = preceptor.cursos
-        return render_template("registraAsistencia.html", usuario = preceptor, cursos = cursos_preceptor)
+        return render_template("registraAsistencia.html", usuario = preceptor, cursos = cursos_preceptor, band = True)
     else:
         rol = session.get("rol")
         str(rol)
         return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
 
-
+@app.route('/cargaAsistencia', methods=['POST'])
+def cargaAsistencia():
+    fecha = request.form['fecha']
+    tipo = request.form['tipo']
+    estudiante_ids = request.form.getlist('estudiante')
+    print(fecha)
+    print(tipo)
+    print(estudiante_ids)
+    return render_template("registraAsistencia.html")
 
 @app.route("/informaAsistencia.html")
 def informaAsistencia():

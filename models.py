@@ -10,7 +10,7 @@ class Curso(db.Model):
     anio=db.Column(db.Integer, nullable=False)
     division=db.Column(db.Integer, nullable=False)
     idpreceptor=db.Column(db.Integer, db.ForeignKey("preceptor.id"))
-    cursos=db.relationship('Estudiante',backref='curso', cascade="all")
+    estudiantes=db.relationship('Estudiante',backref='curso', cascade="all")
 
 class Preceptor(db.Model):
     id=db.Column(db.Integer, primary_key=True)
