@@ -54,3 +54,9 @@ body{
     color: #666;
     margin-top: 10px;
 }
+.container-form {
+    display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 50vh;
+}

@@ -7,9 +7,9 @@ db = SQLAlchemy(app)
 class Curso(db.Model):
     __tablename__="curso"
     id= db.Column(db.Integer, primary_key=True)
-    ano=db.Column(db.Integer, nullable=False)
+    anio=db.Column(db.Integer, nullable=False)
     division=db.Column(db.Integer, nullable=False)
-    preceptor_id=db.Column(db.Integer, db.ForeignKey("preceptor.id"))
+    idpreceptor=db.Column(db.Integer, db.ForeignKey("preceptor.id"))
     cursos=db.relationship('Estudiante',backref='curso', cascade="all")
 
 class Preceptor(db.Model):
@@ -39,7 +39,7 @@ class Asistencia(db.Model):
     __tablename__ = "asistencia"
     id = db.Column(db.Integer, primary_key = True)
     fecha = db.Column(db.DateTime, nullable = False)
-    codigoClase = db.Column(db.Integer, nullable = False)
+    codigoclase = db.Column(db.Integer, nullable = False)
     asistio = db.Column(db.String(1), nullable = False)
     justificacion = db.Column(db.Text, nullable = False)
     idestudiante = db.Column(db.Integer, nullable = False)

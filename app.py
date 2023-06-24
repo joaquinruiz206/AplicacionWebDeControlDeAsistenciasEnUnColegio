@@ -84,7 +84,8 @@ def registraAsistencia():
     if session.get("rol") == "preceptor":
         usuario_id = session.get('usuario_id')
         preceptor = Preceptor.query.get(usuario_id)
-        return render_template("registraAsistencia.html", usuario = preceptor)
+        cursos_preceptor = preceptor.cursos
+        return render_template("registraAsistencia.html", usuario = preceptor, cursos = cursos_preceptor)
     else:
         rol = session.get("rol")
         str(rol)
