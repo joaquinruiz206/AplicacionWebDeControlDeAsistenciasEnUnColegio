@@ -118,13 +118,10 @@ def cargaDatos():
     if request.method == "POST":
         tipo = request.args.get("tipo")
         fecha = request.args.get("fecha")
-        print(fecha)
-        print(type(fecha))
         nombreCurso = request.args.get("curso")
         match = re.search(r'\d+', nombreCurso)
         curso_id = int(match.group())
         curso = Curso.query.filter_by(id=curso_id).first()
-        print(curso)
         if curso != None:
             estudiantes = curso.estudiantes
             for estudiante in estudiantes:
@@ -229,8 +226,7 @@ def asistenciahijo():
     if request.method == 'POST':
         id_est = request.form['dni']
         estudiante = Estudiante.query.get(id_est)
-        print(str(estudiante))
-        
+
         return render_template("asistenciahijo.html", band=False, asistencias=estudiante.asistencias)
 
     if session.get("rol") == "padre":
