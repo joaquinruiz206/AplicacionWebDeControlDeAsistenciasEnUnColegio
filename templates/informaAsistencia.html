@@ -57,7 +57,9 @@
             <label  name="{{ estudiante.dni }}"  class="form-check-label" for="checkbox1" id="estudiante">
               {{ estudiante.nombre }} {{ estudiante.apellido }}
             </label>
-            
+            <label>
+                {{ estudiante.registroAsistencias.get_cantidadAulaP() }}
+            </label>
           </div>
 
 

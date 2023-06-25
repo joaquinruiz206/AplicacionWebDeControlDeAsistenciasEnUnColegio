@@ -33,12 +33,17 @@ class Estudiante(db.Model):
     idcurso=db.Column(db.Integer, db.ForeignKey("curso.id"))
     asistencias=db.relationship('Asistencia',backref='estudiante', cascade="all")
     idpadre=db.Column(db.Integer, db.ForeignKey("padre.id"))
+    registroAsistencias = None
+
+    def creaRegistro(self, registro):
+        self.registroAsistencias = registro
+    
     def __lt__(self,otro):
         if self.nombre == otro.nombre:    
             return self.apellido < otro.apellido
         else:
             return self.nombre < otro.nombre
-        
+
         
 
 class Asistencia(db.Model):
@@ -62,3 +67,38 @@ class Padre(db.Model):
     correo = db.Column(db.String(50), unique = True, nullable = False)
     clave = db.Column(db.String(120),unique = True, nullable = False)
     hijos=db.relationship('Estudiante',backref='padre', cascade="all")
+
+
+class registroAsistencias:
+    def __init__(self, estudiante):
+        self.__cantidadAulaP = 0
+        self.__cantidadFisP = 0
+        self.__cantidadAulaJ = 0
+        self.__cantidadAulaI = 0
+        self.__cantidadFisJ = 0
+        self.__cantidadFisI = 0
+        self.__cantidadTotalInas = 0
+        self.__cantidadTotalAsis = 0
+        self.__estudiante = estudiante
+    def carga(self, asistencias):
+        for asistencia in asistencias:
+            if asistencia.codigoclase == 1 and asistencia.asistio == "s":
+                self.__cantidadAulaP += 1
+            elif asistencia.codigoclase == 2 and asistencia.asistio == "s":
+                self.__cantidadFisP += 1            
+            elif asistencia.codigoclase == 1 and asistencia.asistio == "n":
+                if asistencia.justificacion != " ":
+                    self.__cantidadAulaJ += 1
+                else:
+                    self.__cantidadAulaI += 1
+            elif asistencia.codigoclase == 2 and asistencia.asistio == "n":
+                if asistencia.justificacion != " ":
+                    self.__cantidadFisJ += 0.5
+                else:
+                    self.__cantidadFisI += 0.5
+        
+        self.__cantidadTotalInas +=    self.__cantidadAulaJ +self.__cantidadAulaI  + self.__cantidadFisJ +self.__cantidadFisI 
+        self.__cantidadTotalAsis += self.__cantidadAulaP + self.__cantidadFisP
+        
+    def get_cantidadAulaP(self):
+        return self.__cantidadAulaP

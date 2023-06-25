@@ -14,7 +14,7 @@ app.config.from_pyfile('config.py')
 
 
 from models import db
-from models import Estudiante,Preceptor,Padre,Curso,Asistencia
+from models import Estudiante,Preceptor,Padre,Curso,Asistencia,registroAsistencias
 
 @app.route('/')
 def inicio():
@@ -157,8 +157,11 @@ def informaAsistencia():
         estudiantes.sort()
         for estudiante in estudiantes:
             asistencias = estudiante.asistencias
+            registro_asistencia = registroAsistencias(estudiante)
+            estudiante.creaRegistro(registro_asistencia)
+            registro_asistencia.carga(asistencias)
             
-        return render_template(url_for("informaAsistencia"), band = False, estudiantes = estudiantes)
+        return render_template(url_for("informaAsistencia"), band = False, estudiantes = estudiantes )
     if session.get("rol") == "preceptor":
         usuario_id = session.get('usuario_id')
         preceptor = Preceptor.query.get(usuario_id)
