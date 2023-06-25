@@ -189,7 +189,7 @@ def informeTotal():
         lista=[]
         for estudiante in estudiantes:
             if estudiante.asistencia.fecha == fecha:
-                 
+                 print("HOLA ESTOY ACA")
         
         return render_template("informeTotal.html", tipo = tipo, fecha = fecha, curso = curso, estudiantes = estudiantes, band = False)
             
