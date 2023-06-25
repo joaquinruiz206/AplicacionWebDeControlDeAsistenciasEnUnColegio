@@ -156,7 +156,7 @@ def informaAsistencia():
         estudiantes = curso.estudiantes
         estudiantes.sort()
         for estudiante in estudiantes:
-            asistencias = estudiante.asistencias 
+            asistencias = estudiante.asistencias
             
         return render_template(url_for("informaAsistencia"), band = False, estudiantes = estudiantes)
     if session.get("rol") == "preceptor":
