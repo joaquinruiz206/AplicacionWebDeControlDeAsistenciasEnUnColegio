@@ -32,7 +32,51 @@
 
     <h1 class= "principal"> Asistencias Colegio San Miguel</h1>
 
+    {% if band %}
+    <div class= "container-form">
+        
+        <form method="post">
+                <div class="input-box">
+                <label>Fecha</label>
+                <input type="date" placeholder="fecha" name="fecha" pattern="\d{2}/\d{2}/\d{4}" class="input-control" required>
+            </div>
+            <label >Tipo de curso</label>
+                <select  name="tipo" class="form-select" aria-label="Default select example">
+                    <option  value="1">Aula</option>
+                    <option  value= "2">Física</option>
+                </select>
+                <label >Número de curso</label>
+                <select name= "curso" class="form-select" aria-label="Default select example">
+                    {% for curso in cursos %}
+                      <option  value= {{ curso.id }} >{{curso.id}}</option>
+                    {% endfor %}
+                </select>
     
+                <br></br>
+            <button type="submit" value = "Guardar" class="btn"> Enviar </button>
+        </form>
+     </div>
+     {% else %}
+      
+     <table class="table table-dark table-striped">
+         <thead>
+           <tr>
+             <th scope="col">#</th>
+             <th scope="col">Nombre</th>
+             <th scope="col">Asistencia</th>
+           </tr>
+         </thead>
+        {% for estudiante in estudiantes %}
+            <tbody>
+              <tr>
+                <th scope="row">{{estudiante.id}}</th>
+                <td>{{estudiante.nombre}} {{estudiante.apellido}}</td>
+                <td>{{estudiante.asistencia.asistio}}</td>
+              </tr>
+          </table>
+        {% endfor %}
+
+    {% endif %}
     <footer>
         <div class="footer-content">
             <h3>Colegio</h3>

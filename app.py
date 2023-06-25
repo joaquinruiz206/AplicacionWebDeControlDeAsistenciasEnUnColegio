@@ -157,12 +157,25 @@ def informaAsistencia():
 
 
 
-@app.route("/informeTotal.html")
+@app.route("/informeTotal.html", methods=["POST","GET"])
 def informeTotal():
+    
+    if request.method == "POST":   
+            
+        tipo = request.form["tipo"]
+        fecha = request.form["fecha"]
+        idcurso = request.form["curso"]
+        curso = Curso.query.get(idcurso)
+        estudiantes = curso.estudiantes
+        #estudiantes.sort()
+        return render_template("informeTotal.html", tipo = tipo, fecha = fecha, curso = curso, estudiantes = estudiantes, band = False)
+            
+    
     if session.get("rol") == "preceptor":
         usuario_id = session.get('usuario_id')
         preceptor = Preceptor.query.get(usuario_id)
-        return render_template("informeTotal.html", usuario = preceptor)
+        cursos_preceptor = preceptor.cursos
+        return render_template("informeTotal.html", usuario = preceptor, cursos = cursos_preceptor, band = True)
     else:
         rol = session.get("rol")
         str(rol)
