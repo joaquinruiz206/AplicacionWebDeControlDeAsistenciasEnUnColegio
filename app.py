@@ -3,11 +3,8 @@ from flask  import Flask, request, render_template, session, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from dateutil.parser import parse
-<<<<<<< HEAD
 import re
-=======
 import hashlib
->>>>>>> 10f0576d9ca2a364b0807676e637c5afeb3bc27a
 
 app=Flask(__name__)
 app.config.from_pyfile('config.py')
@@ -134,7 +131,8 @@ def cargaDatos():
                     justificativo = justificacion
                     asistencia = "n"
                     
-                nueva_asistencia = Asistencia(fecha, tipo, asistencia, justificativo, estudiante.id)
+                nueva_asistencia = Asistencia(fecha=fecha, codigoclase=tipo, asistio=asistencia, justificacion=justificativo, idestudiante=estudiante.id)
+
                 db.session.add(nueva_asistencia)
                 db.session.commit()
             
