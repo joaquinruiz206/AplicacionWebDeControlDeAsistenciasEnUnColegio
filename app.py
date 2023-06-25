@@ -199,6 +199,7 @@ def informeTotal():
                     lista.append(asistencia.asistio)
         print(lista)
                  
+
         
         return render_template("informeTotal.html", tipo = tipo, fecha = fecha, curso = curso, estudiantes = estudiantes, band = False,lista=lista,cant=len(estudiantes))
             
