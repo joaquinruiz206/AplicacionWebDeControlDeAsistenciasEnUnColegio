@@ -1,15 +1,14 @@
-*{
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-body{
+body {
     background-color: rgb(207, 255, 255);
-
 }
-.principal{
 
+.principal {
     text-align: center;
     text-decoration: underline;
     text-decoration-color: #8c0101;
@@ -19,20 +18,25 @@ body{
     margin-bottom: 50px;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
 }
+
 .card-img-top {
     height: 200px;
     object-fit: cover;
 }
+
 .card-body {
     text-align: center;
 }
+
 .card-title {
     font-size: 18px;
     font-weight: bold;
 }
+
 .card-text {
     margin-bottom: 15px;
 }
+
 .btn-primary {
     width: 100%;
 }
@@ -41,44 +45,72 @@ body{
     text-align: center;
     margin-top: 50px;
 }
+
 .profile-icon {
     font-size: 80px;
     color: #333;
 }
+
 .profile-name {
     font-size: 24px;
     margin-top: 20px;
 }
+
 .profile-email {
     font-size: 18px;
     color: #666;
     margin-top: 10px;
 }
+
 .container-form {
     display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 50vh;
+    justify-content: center;
+    align-items: center;
+  
+    margin: 50px;
+    height:50vh;
+    background-color: #598bbc;
+    padding: 10px;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 1);
 }
-.form-check{
-	display: flex;
-	justify-content: center;
+
+label {
+    font-weight: bold;
 }
-.form-check-input{
-	position: relative;
+
+select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
 }
-#estudiante{
-	padding-left: 50 px;
+
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #5a8f41de;
+    color: #ffffff !important;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid #000 !important;
+    transition: 1s ease;
+}
+
+button:hover {
+    background-color: #0e569e;
+    
 }
 
 .cuadro {
     border: 1px solid black;
     padding: 10px;
     margin-bottom: 10px;
-  }
+}
 
-  .containerDatosTotales {
+.containerDatosTotales {
     margin-top: 20px;
     margin: 80px;
     box-shadow: 0 10px 10px rgba(0, 0, 0, 1);
-  }
+}
