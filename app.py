@@ -180,7 +180,7 @@ def informeTotal():
     
     if request.method == "POST":   
             
-        tipo = request.form["tipo"]
+        tipo = int(request.form["tipo"])
         fecha = request.form["fecha"]
         idcurso = request.form["curso"]
         curso = Curso.query.get(idcurso)
@@ -189,14 +189,19 @@ def informeTotal():
         estudiantes.sort()
         lista=[]
         for estudiante in estudiantes:
-            for asistencia in estudiante.asistencias:
+            asistencias = estudiante.asistencias
+            for asistencia in asistencias:
                 
                 fecha1=str(asistencia.fecha)
                 nuevafecha=fecha1.split(" ")
-                print(asistencia.codigoclase)
                 
                 if nuevafecha[0] == fecha and tipo == asistencia.codigoclase:
+                    print("ENTRE")
                     lista.append(asistencia.asistio)
+                    
+                print("\n")
+                print("\n")
+                print("\n")
         print(lista)
                  
 
