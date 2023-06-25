@@ -113,7 +113,7 @@ def registraAsistencia():
 
     return redirect(url_for("inicio"+ rol))
 
-@app.route("/cargaDatos.html", methods = ["POST"])
+@app.route("/cargaDatos", methods = ["POST"])
 def cargaDatos():
     if request.method == "POST":
         tipo = request.args.get("tipo")
@@ -197,11 +197,6 @@ def informeTotal():
                 
                 if nuevafecha[0] == fecha and tipo == asistencia.codigoclase:
                     lista.append(asistencia.asistio)
-<<<<<<< HEAD
-     
-        print(lista)
-=======
->>>>>>> 27c93b22c5f2661ef629e300b49db9d7078c3529
                  
 
         

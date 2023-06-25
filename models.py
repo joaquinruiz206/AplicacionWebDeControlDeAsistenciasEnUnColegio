@@ -87,12 +87,12 @@ class registroAsistencias:
             elif asistencia.codigoclase == 2 and asistencia.asistio == "s":
                 self.__cantidadFisP += 1            
             elif asistencia.codigoclase == 1 and asistencia.asistio == "n":
-                if asistencia.justificacion != " ":
+                if asistencia.justificacion != "":
                     self.__cantidadAulaJ += 1
                 else:
                     self.__cantidadAulaI += 1
             elif asistencia.codigoclase == 2 and asistencia.asistio == "n":
-                if asistencia.justificacion != " ":
+                if asistencia.justificacion != "":
                     self.__cantidadFisJ += 0.5
                 else:
                     self.__cantidadFisI += 0.5
