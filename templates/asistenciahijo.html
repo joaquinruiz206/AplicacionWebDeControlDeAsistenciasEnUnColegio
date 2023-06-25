@@ -24,7 +24,7 @@
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item active">
-                    <a class="nav-link" href="/iniciarSesion.html">Cerrar Sesion</a>
+                    <a class="nav-link" href="/indexpadre.html">Volver</a>
                 </li>
             </ul>
         </div>
@@ -55,8 +55,15 @@
     </div>
     {% else %}
 
+        {% for asistencia in asistencias %}
         
-            <p>{{ asistencias.asistencias }}</p>
+        <div class="cuadro">
+            <p>Fecha: {{ asistencia.fecha }}</p>
+            <p>Clase: {{ asistencia.codigoclase }}</p>
+            <p>Asistencia: {{ asistencia.asistio }}</p>
+            <p>Justificación: {{ asistencia.justificacion }}</p>
+          </div>
+        {% endfor %}
        
     {% endif %}
  

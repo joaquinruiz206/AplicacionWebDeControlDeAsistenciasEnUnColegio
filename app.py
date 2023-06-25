@@ -3,6 +3,7 @@ from flask  import Flask, request, render_template, session, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from dateutil.parser import parse
+import hashlib
 
 app=Flask(__name__)
 app.config.from_pyfile('config.py')
@@ -29,6 +30,9 @@ def iniciarSesion():
             return render_template("iniciarSesion.html", error="Ingrese correo y contraseña")
         else:
             clave = request.form["contraseña"]
+            
+            result = hashlib.md5(bytes(clave, encoding='utf-8'))
+            
             rol = request.form["rol"]
             correo = request.form["usuario"]
 
@@ -41,7 +45,7 @@ def iniciarSesion():
             
             
 
-            if usuario and usuario.clave == clave:
+            if usuario and usuario.clave == result.hexdigest():
 
                 session['usuario_id'] = usuario.id
                 session["rol"] = rol
@@ -156,17 +160,7 @@ def asistenciahijo():
         estudiante = Estudiante.query.get(id_est)
         print(str(estudiante))
         
-        """    
-        if estudiante is not None:
-            band = False
-            asistencias = []
-        for asistencia in estudiante.asistencias:
-                fecha_str = asistencia.fecha
-                fecha = datetime.strptime(fecha_str, '%d-%m-%Y')
-                asistencia.fecha = fecha.strftime('%d-%m-%Y')
-                asistencias.append(asistencia)
-        """
-        return render_template("asistenciahijo.html", band=False, asistencias=estudiante)
+        return render_template("asistenciahijo.html", band=False, asistencias=estudiante.asistencias)
 
     if session.get("rol") == "padre":
         usuario_id = session.get('usuario_id')
@@ -180,6 +174,7 @@ def asistenciahijo():
         
 
 if __name__ =="__main__":
+
     with app.app_context(): 
         db.create_all()
         app.run(debug=True)
