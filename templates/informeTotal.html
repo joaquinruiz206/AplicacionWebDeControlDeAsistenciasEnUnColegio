@@ -57,25 +57,26 @@
         </form>
      </div>
      {% else %}
-      
+     <div class="containerDatosTotales">
      <table class="table table-dark table-striped">
-         <thead>
-           <tr>
-             <th scope="col">#</th>
-             <th scope="col">Nombre</th>
-             <th scope="col">Asistencia</th>
-           </tr>
-         </thead>
-        {% for estudiante in estudiantes %}
-            <tbody>
-              <tr>
-                <th scope="row">{{estudiante.id}}</th>
-                <td>{{estudiante.nombre}} {{estudiante.apellido}}</td>
-                <td>{{estudiante.asistencia.asistio}}</td>
-              </tr>
-          </table>
-        {% endfor %}
-
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Asistencia</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for estudiante in estudiantes %}
+          <tr>
+            <th scope="row">{{ estudiante.id }}</th>
+            <td>{{ estudiante.nombre }} {{ estudiante.apellido }}</td>
+            <td>{{ estudiante.asistencia }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
     {% endif %}
     <footer>
         <div class="footer-content">
