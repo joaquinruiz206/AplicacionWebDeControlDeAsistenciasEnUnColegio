@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
     
     <link rel="stylesheet" href="{{url_for('static', filename= 'css/mainIndex.css')}}">
+        <link rel="stylesheet" href="{{url_for('static', filename= 'css/form.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename= 'css/footer.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename= 'css/error.css')}}">
     <title>Aplicacion Asistencias</title>
@@ -60,8 +61,16 @@
         <div class="cuadro">
             <p>Fecha: {{ asistencia.fecha }}</p>
             <p>Clase: {{ asistencia.codigoclase }}</p>
-            <p>Asistencia: {{ asistencia.asistio }}</p>
+            {% if asistencia.asistio == "s" %}
+                <p>Asistencia: Asistio</p>
+            {% else %}
+                <p>Asistencia: No Asistio</p>
+            {% endif %}
+            {% if asistencia.justificacion != "" %}
             <p>Justificación: {{ asistencia.justificacion }}</p>
+            {% else %}
+            <p>Justificación: No justifico </p>
+            {% endif %}
           </div>
         {% endfor %}
        
