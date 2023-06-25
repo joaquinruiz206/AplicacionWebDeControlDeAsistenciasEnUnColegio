@@ -71,7 +71,11 @@
           <tr>
             <th scope="row">{{ estudiantes[i].id }}</th>
             <td>{{ estudiantes[i].nombre }} {{ estudiantes[i].apellido }}</td>
-            <td>{{ lista[i] }}</td>
+            {% if lista[i]== "s" %}
+            <td>Asistio</td>
+            {% else %}
+            <td>No asistio</td>
+            {% endif %}
           </tr>
           {% endfor %}
         </tbody>
