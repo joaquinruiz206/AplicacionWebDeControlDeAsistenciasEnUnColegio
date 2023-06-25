@@ -156,9 +156,9 @@ def informaAsistencia():
         estudiantes = curso.estudiantes
         estudiantes.sort()
         for estudiante in estudiantes:
-            asistencias = estudiante.asistencias
             registro_asistencia = registroAsistencias(estudiante)
             estudiante.creaRegistro(registro_asistencia)
+            asistencias = estudiante.asistencias
             registro_asistencia.carga(asistencias)
             
         return render_template(url_for("informaAsistencia"), band = False, estudiantes = estudiantes )
