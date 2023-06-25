@@ -3,11 +3,10 @@ from flask  import Flask, request, render_template, session, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from dateutil.parser import parse
-<<<<<<< HEAD
+
 import re
-=======
 import hashlib
->>>>>>> 10f0576d9ca2a364b0807676e637c5afeb3bc27a
+
 
 app=Flask(__name__)
 app.config.from_pyfile('config.py')
@@ -118,6 +117,8 @@ def cargaDatos():
     if request.method == "POST":
         tipo = request.args.get("tipo")
         fecha = request.args.get("fecha")
+        print(fecha)
+        print(type(fecha))
         nombreCurso = request.args.get("curso")
         match = re.search(r'\d+', nombreCurso)
         curso_id = int(match.group())
@@ -133,8 +134,8 @@ def cargaDatos():
                     justificacion = request.form.get("justificativo" + str(estudiante.id))
                     justificativo = justificacion
                     asistencia = "n"
-                    
-                nueva_asistencia = Asistencia(fecha, tipo, asistencia, justificativo, estudiante.id)
+                fecha_transformada = datetime.strptime(fecha, "%Y-%m-%d").date()
+                nueva_asistencia = Asistencia(fecha=fecha_transformada, codigoclase=tipo, asistio=asistencia, justificacion = justificativo, idestudiante = estudiante.id)
                 db.session.add(nueva_asistencia)
                 db.session.commit()
             
