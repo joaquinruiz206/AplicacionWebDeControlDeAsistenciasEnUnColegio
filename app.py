@@ -3,6 +3,7 @@ from flask  import Flask, request, render_template, session, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import generate_password_hash, check_password_hash
 from dateutil.parser import parse
+import re
 
 app=Flask(__name__)
 app.config.from_pyfile('config.py')
@@ -80,7 +81,7 @@ def iniciopadre():
         return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
 
 
-@app.route("/registraAsistencia.html")
+@app.route("/registraAsistencia.html", methods =["POST", "GET"])
 def registraAsistencia():
 
     if request.method == "POST":   
@@ -92,7 +93,7 @@ def registraAsistencia():
             estudiantes = curso.estudiantes
             return render_template("registraAsistencia.html", tipo = tipo, fecha = fecha, curso = curso, estudiantes = estudiantes, band = False)
             
-        
+    
     if session.get("rol") == "preceptor":
         usuario_id = session.get('usuario_id')
         preceptor = Preceptor.query.get(usuario_id)
@@ -103,6 +104,36 @@ def registraAsistencia():
         str(rol)
         return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
 
+    return redirect(url_for("inicio"+ rol))
+
+@app.route("/cargaDatos.html", methods = ["POST"])
+def cargaDatos():
+    if request.method == "POST":
+        tipo = request.args.get("tipo")
+        fecha = request.args.get("fecha")
+        nombreCurso = request.args.get("curso")
+        match = re.search(r'\d+', nombreCurso)
+        curso_id = int(match.group())
+        curso = Curso.query.filter_by(id=curso_id).first()
+        print(curso)
+        if curso != None:
+            estudiantes = curso.estudiantes
+            for estudiante in estudiantes:
+                if request.form.getlist(str(estudiante.id)):
+                    justificativo = " "
+                    asistencia = "s"
+                else:
+                    justificacion = request.form.get("justificativo" + str(estudiante.id))
+                    justificativo = justificacion
+                    asistencia = "n"
+                    
+                nueva_asistencia = Asistencia(fecha, tipo, asistencia, justificativo, estudiante.id)
+                db.session.add(nueva_asistencia)
+                db.session.commit()
+            
+      
+    rol = session.get("rol")
+    str(rol)
     return redirect(url_for("inicio"+ rol))
 
 @app.route("/informaAsistencia.html")
