@@ -185,13 +185,22 @@ def informeTotal():
         idcurso = request.form["curso"]
         curso = Curso.query.get(idcurso)
         estudiantes = curso.estudiantes
+        
         estudiantes.sort()
         lista=[]
         for estudiante in estudiantes:
-            if estudiante.asistencia.fecha == fecha:
+            for asistencia in estudiante.asistencias:
+                
+                fecha1=str(asistencia.fecha)
+                nuevafecha=fecha1.split(" ")
+                print(asistencia.codigoclase)
+                
+                if nuevafecha[0] == fecha and tipo == asistencia.codigoclase:
+                    lista.append(asistencia.asistio)
+        print(lista)
                  
         
-        return render_template("informeTotal.html", tipo = tipo, fecha = fecha, curso = curso, estudiantes = estudiantes, band = False)
+        return render_template("informeTotal.html", tipo = tipo, fecha = fecha, curso = curso, estudiantes = estudiantes, band = False,lista=lista,cant=len(estudiantes))
             
     
     if session.get("rol") == "preceptor":

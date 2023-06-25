@@ -67,11 +67,11 @@
           </tr>
         </thead>
         <tbody>
-          {% for estudiante in estudiantes %}
+          {% for i in range(0,cant) %}
           <tr>
-            <th scope="row">{{ estudiante.id }}</th>
-            <td>{{ estudiante.nombre }} {{ estudiante.apellido }}</td>
-            <td>{{ estudiante.asistencia }}</td>
+            <th scope="row">{{ estudiantes[i].id }}</th>
+            <td>{{ estudiantes[i].nombre }} {{ estudiantes[i].apellido }}</td>
+            <td>{{ lista[i] }}</td>
           </tr>
           {% endfor %}
         </tbody>
