@@ -196,10 +196,12 @@ def informeTotal():
                 nuevafecha=fecha1.split(" ")
                 
                 if nuevafecha[0] == fecha and tipo == asistencia.codigoclase:
-                    print("ENTRE")
                     lista.append(asistencia.asistio)
+<<<<<<< HEAD
      
         print(lista)
+=======
+>>>>>>> 27c93b22c5f2661ef629e300b49db9d7078c3529
                  
 
         
