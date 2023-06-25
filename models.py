@@ -33,6 +33,12 @@ class Estudiante(db.Model):
     idcurso=db.Column(db.Integer, db.ForeignKey("curso.id"))
     asistencias=db.relationship('Asistencia',backref='estudiante', cascade="all")
     idpadre=db.Column(db.Integer, db.ForeignKey("padre.id"))
+    def __lt__(self,otro):
+        if self.nombre == otro.nombre:    
+            return self.apellido < otro.apellido
+        else:
+            return self.nombre < otro.nombre
+        
         
 
 class Asistencia(db.Model):

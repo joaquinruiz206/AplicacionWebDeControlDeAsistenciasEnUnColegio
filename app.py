@@ -97,6 +97,7 @@ def registraAsistencia():
             idcurso = request.form["curso"]
             curso = Curso.query.get(idcurso)
             estudiantes = curso.estudiantes
+            estudiantes.sort()
             return render_template("registraAsistencia.html", tipo = tipo, fecha = fecha, curso = curso, estudiantes = estudiantes, band = False)
             
     
@@ -144,18 +145,32 @@ def cargaDatos():
     str(rol)
     return redirect(url_for("inicio"+ rol))
 
-@app.route("/informaAsistencia.html")
+
+
+@app.route("/informaAsistencia.html", methods =["POST", "GET"])
 def informaAsistencia():
+    
+    if request.method == "POST":
+        idcurso = request.form["curso"]
+        curso = Curso.query.get(idcurso)
+        estudiantes = curso.estudiantes
+        estudiantes.sort()
+        for estudiante in estudiantes:
+            asistencias = estudiante.asistencias 
+            
+        return render_template(url_for("informaAsistencia"), band = False, estudiantes = estudiantes)
     if session.get("rol") == "preceptor":
         usuario_id = session.get('usuario_id')
         preceptor = Preceptor.query.get(usuario_id)
-        return render_template("informaAsistencia.html", usuario = preceptor)
+        cursos_preceptor = preceptor.cursos
+        return render_template(url_for("informaAsistencia"),usuario = preceptor,cursos = cursos_preceptor, band = True)
     else:
         rol = session.get("rol")
         str(rol)
-        return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
+        return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))    
+    
 
-
+    return redirect(url_for("inicio"+ rol, error = "Ingreso no autorizado"))
 
 @app.route("/informeTotal.html")
 def informeTotal():

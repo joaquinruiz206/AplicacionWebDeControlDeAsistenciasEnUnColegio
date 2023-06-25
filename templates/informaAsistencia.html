@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
-    
+
     <link rel="stylesheet" href="{{url_for('static', filename= 'css/mainIndex.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename= 'css/footer.css')}}">
     <link rel="stylesheet" href="{{url_for('static', filename= 'css/error.css')}}">
@@ -30,8 +30,45 @@
         </div>
     </nav>
 
-    <h1 class= "principal"> Asistencias Colegio San Miguel</h1>
 
+<h1 class= "principal"> Asistencias Colegio San Miguel</h1>
+    {% if band %}
+        <div class= "container-form">
+        
+            <form method="post">
+                    <label >Elija curso asignado</label>
+                    <select name= "curso" class="form-select" aria-label="Default select example">
+                        {% for curso in cursos %}
+                          <option  value= {{ curso.id }} >{{curso.id}}</option>
+                        {% endfor %}
+                    </select>
+        
+                    <br></br>
+                <button type="submit" value = "Guardar" class="btn"> Enviar </button>
+            </form>
+         </div>
+
+    {% else %}
+    <div class="container">
+  <div class="row justify-content-center">
+    <div class="col-md-6">
+      {% for estudiante in estudiantes %}
+        <div class="form-group">
+            <label  name="{{ estudiante.dni }}"  class="form-check-label" for="checkbox1" id="estudiante">
+              {{ estudiante.nombre }} {{ estudiante.apellido }}
+            </label>
+            
+          </div>
+
+
+         {% endfor %}
+        </div>
+      </div>
+    </div>
+
+
+
+    {% endif %}
     
     <footer>
         <div class="footer-content">
