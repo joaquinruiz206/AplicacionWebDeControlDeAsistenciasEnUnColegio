@@ -97,7 +97,7 @@ class registroAsistencias:
                 else:
                     self.__cantidadFisI += 0.5
         
-        self.__cantidadTotalInas +=    self.__cantidadAulaJ +self.__cantidadAulaI  + self.__cantidadFisJ +self.__cantidadFisI 
+        self.__cantidadTotalInas +=    self.__cantidadAulaJ +self.__cantidadAulaI  + self.__cantidadFisJ + self.__cantidadFisI 
         self.__cantidadTotalAsis += self.__cantidadAulaP + self.__cantidadFisP
         
     def get_cantidadAulaP(self):
